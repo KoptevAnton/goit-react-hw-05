@@ -1,4 +1,4 @@
-import s from './MovieDetailsPage.module.css';
+// import s from './MovieDetailsPage.module.css';
 
 const MovieDetailsPage = () => {
   return (

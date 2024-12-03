@@ -1,4 +1,4 @@
-import s from './NotFoundPage.module';
+// import s from './NotFoundPage.module';
 
 const NotFoundPage = () => {
   return (
