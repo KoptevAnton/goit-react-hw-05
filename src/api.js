@@ -14,4 +14,16 @@ export async function getTrendingMovies() {
   return response.data.results;
 }
 
-
+export async function searchMovies(searchQuery, page) {
+  options.params = {
+    query: searchQuery,
+    include_adult: "false",
+    language: "en-US",
+    page: page,
+  }
+  const response = await axios.get("/search/movie", options)
+  return {
+    results: response.data.results,
+    totalPages: response.data.total_pages
+  };
+}
