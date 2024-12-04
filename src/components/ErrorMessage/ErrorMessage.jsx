@@ -1,7 +1,13 @@
 // import s from "./ErrorMessage.module.css";
 
-const ErrorMessage = ({error}) => {
-  return <div>{error}</div>;
+import { useEffect } from "react";
+import toast, { Toaster } from "react-hot-toast";
+
+const ErrorMessage = ({ error }) => {
+  useEffect(() => {
+    toast.error(error);
+  }, [error]);
+  return <Toaster/>
 }
 
 export default ErrorMessage
