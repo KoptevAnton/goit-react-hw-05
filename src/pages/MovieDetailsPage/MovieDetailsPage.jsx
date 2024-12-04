@@ -1,12 +1,14 @@
 // import s from './MovieDetailsPage.module.css';
 
-import { useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import { getMovieDetails } from '../../api';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Loader from '../../components/Loader/Loader';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 
 const MovieDetailsPage = () => {
+  const location = useLocation();
+  const backLink = useRef(location.state ?? '/movies')
   const { movieId } = useParams();
 
   const [movie, setMovie] = useState([]);
@@ -32,6 +34,9 @@ const MovieDetailsPage = () => {
   return (
     <>
       <div>
+        <Link to={backLink.current}> &lt;&lt;&lt; Go back</Link>
+        {isLoading && <Loader />}
+        {error && <ErrorMessage />}
         <div>
           {movie.poster_path ? (
             <img src={`https://image.tmdb.org/t/p/w300/${movie.poster_path}`} alt={movie.title} />
@@ -57,8 +62,6 @@ const MovieDetailsPage = () => {
           </ul>
         </div>
       </div>
-      {isLoading && <Loader />}
-      {error && <ErrorMessage />}
     </>
   );
 };
