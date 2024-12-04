@@ -27,3 +27,9 @@ export async function searchMovies(searchQuery, page) {
     totalPages: response.data.total_pages
   };
 }
+
+export async function getMovieDetails(movieId) {
+  const response = await axios.get(`/movie/${movieId}`, options);
+  return response.data;
+}
+

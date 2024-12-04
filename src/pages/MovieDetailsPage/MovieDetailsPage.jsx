@@ -1,9 +1,66 @@
 // import s from './MovieDetailsPage.module.css';
 
-const MovieDetailsPage = () => {
-  return (
-    <div>MovieDetailsPage</div>
-  )
-}
+import { useParams } from 'react-router-dom';
+import { getMovieDetails } from '../../api';
+import { useEffect, useState } from 'react';
+import Loader from '../../components/Loader/Loader';
+import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 
-export default MovieDetailsPage
+const MovieDetailsPage = () => {
+  const { movieId } = useParams();
+
+  const [movie, setMovie] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    async function getData() {
+      try {
+        setIsLoading(true);
+        const data = await getMovieDetails(movieId);
+        setMovie(data);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    getData();
+  }, [movieId]);
+
+  console.log(getMovieDetails(movieId));
+  return (
+    <>
+      <div>
+        <div>
+          {movie.poster_path ? (
+            <img src={`https://image.tmdb.org/t/p/w300/${movie.poster_path}`} alt={movie.title} />
+          ) : (
+            <div>
+              <span>Poster not found</span>
+            </div>
+          )}
+        </div>
+        <div>
+          <h2>
+            {movie.title}
+            {movie.release_date}
+          </h2>
+          <p>Rating:{movie.vote_average} </p>
+          <h3>Overview</h3>
+          <p>Overview: {movie.overview} </p>
+          <h3>Genres</h3>
+          <ul>
+            {movie.genre?.map(({ id, name }) => (
+              <li key={id}>{name} </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      {isLoading && <Loader />}
+      {error && <ErrorMessage />}
+    </>
+  );
+};
+
+export default MovieDetailsPage;
