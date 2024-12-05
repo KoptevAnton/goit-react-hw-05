@@ -6,5 +6,11 @@ export default defineConfig({
   plugins: [react()],
   build: {
     sourcemap: true,
+    rollupOptions: {
+      input: '/index.html',
+    },
+  },
+  server: {
+    historyApiFallback: true, // Включає маршрутизацію на клієнті
   },
 });
