@@ -30,7 +30,7 @@ const HomePage = () => {
   return (
     <div>
       {isLoading && <Loader />}
-      {error && <ErrorMessage error={error}/>}
+      {error && <ErrorMessage error={error} />}
       {trendMovies.length > 0 && <MovieList movies={trendMovies} />}
     </div>
   );

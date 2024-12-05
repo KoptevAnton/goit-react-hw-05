@@ -5,10 +5,8 @@ import { Link, useLocation } from 'react-router-dom';
 
 const MovieCard = ({ movie }) => {
   const location = useLocation();
-  const releaseDate = movie.release_date
-    ? format(new Date(movie.release_date), '(yyyy)')
-    : '';
-  
+  const releaseDate = movie.release_date ? format(new Date(movie.release_date), '(yyyy)') : '';
+
   return (
     <Link to={`/movies/${movie.id}`} state={location}>
       {movie.poster_path ? (

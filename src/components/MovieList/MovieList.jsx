@@ -1,6 +1,6 @@
 // import s from './MovieList.module.css'
 
-import MovieCard from "../MovieCard/MovieCard";
+import MovieCard from '../MovieCard/MovieCard';
 
 const MovieList = ({ movies }) => {
   return (
@@ -14,4 +14,4 @@ const MovieList = ({ movies }) => {
   );
 };
 
-export default MovieList
+export default MovieList;
