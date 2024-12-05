@@ -11,6 +11,6 @@ export default defineConfig({
     },
   },
   server: {
-    historyApiFallback: true, // Включає маршрутизацію на клієнті
+    historyApiFallback: true,
   },
 });
