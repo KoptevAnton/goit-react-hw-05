@@ -1,6 +1,6 @@
 // import s from './MovieDetailsPage.module.css';
 
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { Link, NavLink, Outlet, useLocation, useParams } from 'react-router-dom';
 import { getMovieDetails } from '../../api';
 import { useEffect, useRef, useState } from 'react';
 import Loader from '../../components/Loader/Loader';
@@ -8,7 +8,7 @@ import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 
 const MovieDetailsPage = () => {
   const location = useLocation();
-  const backLink = useRef(location.state ?? '/movies')
+  const backLink = useRef(location.state ?? '/movies');
   const { movieId } = useParams();
 
   const [movie, setMovie] = useState([]);
@@ -19,6 +19,7 @@ const MovieDetailsPage = () => {
     async function getData() {
       try {
         setIsLoading(true);
+        setError('');
         const data = await getMovieDetails(movieId);
         setMovie(data);
       } catch (error) {
@@ -29,14 +30,12 @@ const MovieDetailsPage = () => {
     }
     getData();
   }, [movieId]);
-
-  console.log(getMovieDetails(movieId));
   return (
     <>
       <div>
         <Link to={backLink.current}> &lt;&lt;&lt; Go back</Link>
         {isLoading && <Loader />}
-        {error && <ErrorMessage />}
+        {error && <ErrorMessage error={error}/>}
         <div>
           {movie.poster_path ? (
             <img src={`https://image.tmdb.org/t/p/w300/${movie.poster_path}`} alt={movie.title} />
@@ -56,12 +55,23 @@ const MovieDetailsPage = () => {
           <p>Overview: {movie.overview} </p>
           <h3>Genres</h3>
           <ul>
-            {movie.genre?.map(({ id, name }) => (
-              <li key={id}>{name} </li>
+            {movie.genres?.map(({ id, name }) => (
+              <li key={id}>{name}</li>
             ))}
           </ul>
         </div>
       </div>
+      <div>
+        <ul>
+          <li>
+            <NavLink to="cast">Cast</NavLink>
+          </li>
+          <li>
+            <NavLink to="reviews">Reviews</NavLink>
+          </li>
+        </ul>
+      </div>
+      <Outlet />
     </>
   );
 };
