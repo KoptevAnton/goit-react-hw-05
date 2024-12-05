@@ -1,10 +1,12 @@
-// import s from './MovieDetailsPage.module.css';
-
-import { Link, NavLink, Outlet, useLocation, useParams } from 'react-router-dom';
-import { getMovieDetails } from '../../api';
-import { useEffect, useRef, useState } from 'react';
 import Loader from '../../components/Loader/Loader';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
+
+import { Link, NavLink, Outlet, useLocation, useParams } from 'react-router-dom';
+import { Suspense, useEffect, useRef, useState } from 'react';
+
+import { getMovieDetails } from '../../api';
+
+// import s from './MovieDetailsPage.module.css';
 
 const MovieDetailsPage = () => {
   const location = useLocation();
@@ -35,7 +37,7 @@ const MovieDetailsPage = () => {
       <div>
         <Link to={backLink.current}> &lt;&lt;&lt; Go back</Link>
         {isLoading && <Loader />}
-        {error && <ErrorMessage error={error}/>}
+        {error && <ErrorMessage error={error} />}
         <div>
           {movie.poster_path ? (
             <img src={`https://image.tmdb.org/t/p/w300/${movie.poster_path}`} alt={movie.title} />
@@ -71,7 +73,9 @@ const MovieDetailsPage = () => {
           </li>
         </ul>
       </div>
-      <Outlet />
+      <Suspense fallback={<Loader />}>
+        <Outlet />
+      </Suspense>
     </>
   );
 };
