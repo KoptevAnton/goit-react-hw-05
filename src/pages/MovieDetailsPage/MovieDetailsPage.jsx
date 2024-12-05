@@ -5,6 +5,7 @@ import { Link, NavLink, Outlet, useLocation, useParams } from 'react-router-dom'
 import { Suspense, useEffect, useRef, useState } from 'react';
 
 import { getMovieDetails } from '../../api';
+import { format } from 'date-fns';
 
 // import s from './MovieDetailsPage.module.css';
 
@@ -32,6 +33,9 @@ const MovieDetailsPage = () => {
     }
     getData();
   }, [movieId]);
+
+  const releaseDate = movie.release_date ? format(new Date(movie.release_date), '(yyyy)') : '';
+
   return (
     <>
       <div>
@@ -50,9 +54,9 @@ const MovieDetailsPage = () => {
         <div>
           <h2>
             {movie.title}
-            {movie.release_date}
+            {releaseDate}
           </h2>
-          <p>Rating:{movie.vote_average} </p>
+          <p>Rating: {movie.vote_average} </p>
           <h3>Overview</h3>
           <p>Overview: {movie.overview} </p>
           <h3>Genres</h3>

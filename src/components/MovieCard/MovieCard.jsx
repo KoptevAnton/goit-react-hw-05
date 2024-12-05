@@ -1,9 +1,14 @@
 // import s from "./MovieCard.module.css";
 
+import { format } from 'date-fns';
 import { Link, useLocation } from 'react-router-dom';
 
 const MovieCard = ({ movie }) => {
   const location = useLocation();
+  const releaseDate = movie.release_date
+    ? format(new Date(movie.release_date), '(yyyy)')
+    : '';
+  
   return (
     <Link to={`/movies/${movie.id}`} state={location}>
       {movie.poster_path ? (
@@ -15,7 +20,7 @@ const MovieCard = ({ movie }) => {
       )}
       <div>
         {movie.title}
-        {movie.release_date}
+        {releaseDate}
       </div>
     </Link>
   );

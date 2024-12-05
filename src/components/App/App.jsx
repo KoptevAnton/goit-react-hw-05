@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
+
 import Navigation from '../Navigation/Navigation';
 import Loader from '../Loader/Loader';
 
