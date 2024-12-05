@@ -58,7 +58,7 @@ const MovieDetailsPage = () => {
           </h2>
           <p>Rating: {movie.vote_average} </p>
           <h3>Overview</h3>
-          <p>Overview: {movie.overview} </p>
+          <p>{movie.overview} </p>
           <h3>Genres</h3>
           <ul>
             {movie.genres?.map(({ id, name }) => (
