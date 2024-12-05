@@ -15,6 +15,7 @@ const HomePage = () => {
     async function getMovies() {
       try {
         setIsLoading(true);
+        setError('');
         const data = await getTrendingMovies();
         setTrendMovies(data);
       } catch (error) {
@@ -29,7 +30,7 @@ const HomePage = () => {
   return (
     <div>
       {isLoading && <Loader />}
-      {error && <ErrorMessage />}
+      {error && <ErrorMessage error={error}/>}
       {trendMovies.length > 0 && <MovieList movies={trendMovies} />}
     </div>
   );
