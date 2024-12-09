@@ -1,13 +1,16 @@
+import { useEffect, useState } from 'react';
+import { getMovieReviews } from '../../api';
+import { useParams } from 'react-router-dom';
+
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import Loader from '../Loader/Loader';
-import { useParams } from 'react-router-dom';
-import { getMovieReviews } from '../../api';
-import { useEffect, useState } from 'react';
-// import s from './MovieReviews.module.css'
+
+import s from './MovieReviews.module.css';
+import clsx from 'clsx';
 
 const MovieReviews = () => {
   const { movieId } = useParams();
-  console.log(getMovieReviews(movieId));
+
   const [reviews, setReviews] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
@@ -30,16 +33,15 @@ const MovieReviews = () => {
   }, [movieId]);
 
   return (
-    <div>
+    <div className={clsx('container', s.container)}>
       {error && <ErrorMessage error={error} />}
       {isLoading && <Loader />}
       {reviews.length > 0 && (
-        <ul>
+        <ul className={s.list}>
           {reviews.map((review) => (
-            <li key={review.id}>
+            <li className={s.item} key={review.id}>
               <h4>Author: {review.author_details.rating}</h4>
-              <p>Added: {review.created_at}</p>
-              <p>Author: {review.content}</p>
+              <p>{review.content}</p>
             </li>
           ))}
         </ul>

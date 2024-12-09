@@ -1,0 +1,35 @@
+.nav {
+  box-shadow: 4px 4px 12px 0px rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 12px;
+  height: 50px;
+  padding: 4px 16px;
+  margin-bottom: 10px;
+  @media only screen and (min-width: 653px) {
+    margin-bottom: 20px;
+    height: 60px;
+    padding: 8px 32px;
+  }
+}
+
+.navLink {
+  font-size: 26px;
+  font-weight: 600;
+  transition: all 350ms ease-in-out;
+}
+
+.navLink:hover {
+  color: rgb(38, 192, 192);
+}
+
+.navLink:focus {
+  outline-color: rgb(38, 192, 192);
+}
+
+.active {
+  transform: scale(1.1);
+  font-weight: 700;
+  color: rgb(38, 192, 192);
+}

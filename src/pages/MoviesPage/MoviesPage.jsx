@@ -1,15 +1,13 @@
-// import s from './MoviesPage.module.css';
-
 import { useEffect, useState } from 'react';
 import { searchMovies } from '../../api';
-import SearchBar from '../../components/SearchBar/SearchBar';
 import { useSearchParams } from 'react-router-dom';
+
 import MovieList from '../../components/MovieList/MovieList';
 import Loader from '../../components/Loader/Loader';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
+import SearchBar from '../../components/SearchBar/SearchBar';
 
 const MoviesPage = () => {
-  console.log(searchMovies());
   const [params, setParams] = useSearchParams();
   const query = params.get('query') ?? '';
   const page = params.get('page') ? Number(params.get('page')) : 1;

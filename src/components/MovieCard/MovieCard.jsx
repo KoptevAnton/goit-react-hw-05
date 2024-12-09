@@ -1,5 +1,6 @@
-import { format } from 'date-fns';
 import { Link, useLocation } from 'react-router-dom';
+import { format } from 'date-fns';
+
 import s from './MovieCard.module.css';
 
 const MovieCard = ({ movie }) => {
@@ -7,8 +8,8 @@ const MovieCard = ({ movie }) => {
   const releaseDate = movie.release_date ? format(new Date(movie.release_date), '(yyyy)') : '';
 
   return (
-    <div className={s.card}>
-      <Link to={`/movies/${movie.id}`} state={location} className={s.link}>
+    <Link to={`/movies/${movie.id}`} state={location} className={s.link}>
+      <div className={s.containerPoster}>
         {movie.poster_path ? (
           <img
             className={s.poster}
@@ -20,12 +21,12 @@ const MovieCard = ({ movie }) => {
             <span className={s.noPosterText}>Poster not found</span>
           </div>
         )}
-        <div className={s.title}>
-          {movie.title}
-          {releaseDate}
-        </div>
-      </Link>
-    </div>
+      </div>
+      <div className={s.containerText}>
+        {movie.title}
+        {releaseDate}
+      </div>
+    </Link>
   );
 };
 

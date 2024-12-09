@@ -1,10 +1,11 @@
-// import s from './HomePage.module.css';
-
 import { useEffect, useState } from 'react';
 import { getTrendingMovies } from '../../api';
+
 import Loader from '../../components/Loader/Loader';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 import MovieList from '../../components/MovieList/MovieList';
+
+import s from './HomePage.module.css';
 
 const HomePage = () => {
   const [trendMovies, setTrendMovies] = useState([]);
@@ -29,6 +30,7 @@ const HomePage = () => {
 
   return (
     <div>
+      <h1 className={s.title}>Trending today</h1>
       {isLoading && <Loader />}
       {error && <ErrorMessage error={error} />}
       {trendMovies.length > 0 && <MovieList movies={trendMovies} />}

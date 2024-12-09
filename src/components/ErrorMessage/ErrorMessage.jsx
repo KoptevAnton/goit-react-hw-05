@@ -13,11 +13,11 @@ const ErrorMessage = ({ error }) => {
   return (
     <Toaster
       toastOptions={{
-        className: '{s.error}',
+        className: 'errorMessage',
         style: {
-          border: '1px solid #713200',
-          padding: '16px',
-          color: '#db441a',
+          border: '1px solid #FF5733',
+          padding: '4px 8px',
+          color: '#FF5733',
         },
       }}
     />
